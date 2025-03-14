@@ -14,7 +14,7 @@ try {
 // PDO (PDO PHP Data Object): Classe para manipulação de banco de dados
 $conexao = new PDO(
     "mysql:host=$servidor;dbname=$banco;charset=utf8",
-    $usuaro, $senha 
+    $usuario, $senha 
 );
 /* Configurar PDO para lançar exceções/erros caso ocorram */
 $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
