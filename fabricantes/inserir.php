@@ -3,7 +3,7 @@
 if (isset($_POST['inserir'])) {
 
     //Acessando as funções do CRUD de Fabricandites
-    require "../scr/funcoes-fabricantes.php";
+    require "../src/funcoes-fabricantes.php";
 
     //Capturando o nome digitado no novo fabricante
     $nome = filter_input(
@@ -11,7 +11,7 @@ if (isset($_POST['inserir'])) {
 
     // Inserindo o novo fabricante através de uma função
     inserirFabricante($conexao, $nome);
-}
+};
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
