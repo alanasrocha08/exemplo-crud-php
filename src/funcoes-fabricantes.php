@@ -59,8 +59,8 @@ function atualizarFabricante($conexao, $idFabricante, $nomeDoFabricante) :void {
 
     try {
         $consulta = $conexao->prepare($sql);
-        $consulta->bindValue(":nome", $conexao, PDO::PARAM_STR);
-        $consulta->bindValue(":id", $conexao, PDO::PARAM_INT);
+        $consulta->bindValue(":nome", $nomeDoFabricante, PDO::PARAM_STR);
+        $consulta->bindValue(":id", $idFabricante, PDO::PARAM_INT);
         $consulta->execute();
     } catch (Exception $erro) {
         die("Erro ao atualizar fabricante: " . $erro->getMessage());
