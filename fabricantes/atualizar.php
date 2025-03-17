@@ -6,6 +6,17 @@ $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
  
 /* Chamando a função para carregar os dados de um fabricante */
 $fabricante = listarUmFabricante($conexao, $id);
+
+/*Verificando se o formulário de atualização foi acionado */
+if(isset($_POST['atualizar'])){
+    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
+
+    /*Exercício! Implemente a função para atualizar o nome do fabricante */
+    atualizarFabricante($conexao, $id, $nome);
+
+    header("location: visualizar.php");
+    exit;
+}
 ?>
  
  
