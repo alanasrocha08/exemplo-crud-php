@@ -3,9 +3,10 @@ require_once "../src/funcoes-fabricantes.php";
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
 /*Verificando se houve o "SIM" para excluir*/
-if (isset($_Get['confirmar-exclusão'])) {
-    echo "Excluir o fabricante".$id;
-    
+if (isset($_GET['confirmar-exclusão'])) {
+    excluirFabricante($conexao, $id);
+    header("location:visuliazar.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
