@@ -40,15 +40,16 @@ $quantidade = count($listaDeFabricantes);
             <tbody>
 <?php foreach ($listaDeFabricantes as $fabricante) {?>
 
-                <tr>
-                    <td> <?=$fabricante["id"] ?> </td>
-                    <td> <?=$fabricante["nome"]?> </td>
-                    <td> 
-                        <!-- Configurando o link DINÂMICO 
-                        Passamos um parâmetro de URL para a página atualizar.php, neste caso, oparâmetro chamado "id" contendo o valor do id do fabricante a ser editado.-->
-                        <a href="atualizar.php?id=<?=$fabricante['id']?>">Editar</a>
-                    </td>
-                </tr>
+    <tr>
+        <td> <?=$fabricante["id"] ?> </td>
+        <td> <?=$fabricante["nome"]?> </td>
+        <td> 
+        <!-- Configurando o link DINÂMICO 
+        Passamos um parâmetro de URL para a página atualizar.php, neste caso, oparâmetro chamado "id" contendo o valor do id do fabricante a ser editado.-->
+        <a class="btn btn-warning btn-sm" href="atualizar.php?id=<?=$fabricante['id']?>">Editar</a>
+        <a class="btn btn-danger btn-sm" href="excluir.php?id=<?=$fabricante['id']?>">Excluir</a>
+        </td>
+    </tr>
 <?php } ?>
             </tbody>
         </table>
