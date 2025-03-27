@@ -22,19 +22,19 @@ $listaDeProdutos = listarProdutos($conexao);
 
         <p><a class="btn btn-primary btn-sm" href="inserir.php">Inserir novo produto</a></p>
 
-        <div class="row g-1">
+    <div class="row g-1">
             
-    <?php foreach ($listaDeProdutos as $produto) : ?>
+<?php foreach ($listaDeProdutos as $produto) : ?>
         <div class="col-sm-6">
             <article class="bg-body-secondary p-2">
-                <h3><?=$produto["nome"] ?> </h3> 
-                <h4><?=$produto["fabricante_id"]?></h4>
+                <h3><?=$produto["produto"] ?> </h3> 
+                <h4><?=$produto["fabricante"]?></h4>
                 <p><b>Preço:</b> <?=$produto["preco"]?></p>
                 <p><b>Quantidade: </b> <?=$produto["quantidade"]?></p> 
             </article>
-        </div> <!-- Correção da tag div -->
-    <?php endforeach; ?>
-</div>
+        </div>
+<?php endforeach; ?>
+    </div>
 
     </div>
 
