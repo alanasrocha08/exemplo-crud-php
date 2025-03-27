@@ -17,4 +17,5 @@ function listarProdutos(PDO $conexao):array {
     } catch (Exception $erro) {
         die("Erro ao carregar proodutos: ".$erro->getMessage());
     }
-}
+};
+
