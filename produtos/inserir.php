@@ -1,20 +1,57 @@
 <?php
-require_once "../src/funcoes-fabricantes.php"; 
-require_once "../src/funcoes-produtos.php";              
+require_once "../src/funcoes-fabricantes.php";
+require_once "../src/funcoes-produtos.php";
+
 $listaDeFabricantes = listarFabricantes($conexao);
 
-if(isset($_POST["inserir"])){
+if (isset($_POST["inserir"])) {
     // Capturar/sanitizar os dados
-    $inserirProduto = filter_input(
-           
-    )
+    $nome = filter_input(
+        INPUT_POST,
+        'nome',
+        FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+
+    $preco = filter_input(
+        INPUT_POST,
+        'preco',
+        FILTER_SANITIZE_NUMBER_FLOAT,
+        FILTER_FLAG_ALLOW_FRACTION
+    );
+
+    $quantidade = filter_input(
+        INPUT_POST,
+        'quantidade',
+        FILTER_SANITIZE_NUMBER_INT
+    );
+
+    $fabricante = filter_input(
+        INPUT_POST,
+        'fabricante',
+        FILTER_SANITIZE_NUMBER_INT
+    );
+
+    $descricao = filter_input(
+        INPUT_POST,
+        'descricao',
+        FILTER_SANITIZE_SPECIAL_CHARS
+    );
 
     // Chamar a função responsável por inserir o produto e passar os parâmetros
+inserirProduto(
+    $conexao,
+    $nome,
+    $preco,
+    $quantidade,
+    $fabricante,
+    $descricao
+);
 
-    /*NÃO SE ESQUEÇA DE TERMINAR A FUNÇÃO inserirProduto() */
+// Por fim, redirecionar para visualização dos produtos
+header('location: visualizar.php');
+exit;
+}
 
-    //Por fim, redirecionar para visualização dos produtos
-};
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -48,9 +85,9 @@ if(isset($_POST["inserir"])){
                 <label class="form-label" for="fabricante">Fabricante:</label>
                 <select class="form-select" name="fabricante" id="fabricante" required>
                     <option value=""></option>
-<?php foreach($listaDeFabricantes as $fabricante):?>
-    <option value="<?=$fabricante["id"]?>"><?=$fabricante["nome"]?></option>
-<?php endforeach; ?>
+                    <?php foreach ($listaDeFabricantes as $fabricante): ?>
+                        <option value="<?= $fabricante["id"] ?>"><?= $fabricante["nome"] ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="mb-3">
