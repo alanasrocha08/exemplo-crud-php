@@ -48,7 +48,7 @@ inserirProduto(
 );
 
 // Por fim, redirecionar para visualização dos produtos
-header('location: visualizar.php');
+header("location:visualizar.php");
 exit;
 }
 
