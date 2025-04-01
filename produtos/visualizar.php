@@ -2,6 +2,8 @@
 require_once "../src/funcoes-produtos.php" ;
 require_once "../src/funcoes-utilitarias.php" ;
 $listaDeProdutos = listarProdutos($conexao);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +34,13 @@ $listaDeProdutos = listarProdutos($conexao);
                 <h4><?=$produto["fabricante"]?></h4>
                 <p><b>Preço:</b> <?=formatarPreco($produto["preco"])?></p>
                 <p><b>Quantidade: </b> <?=$produto["quantidade"]?></p> 
+                <?php foreach ($listaDeProdutos as $produto) : ?>
                 <p><b>Total:</b><?=formatarPreco($produto["preco"] * $produto["quantidade"])?> </p>
+<?=formatarPreco($produto["preco"] * $produto["quantidade"])?> </p>
+                <p><a class="btn btn-warning btn-sm" href="atualizar.php?id=<?=$produto["id"]?>">Atualizar</a></p>
+<?php endforeach; ?>
+                   
+                </p>
             </article>
         </div>
 <?php endforeach; ?>
