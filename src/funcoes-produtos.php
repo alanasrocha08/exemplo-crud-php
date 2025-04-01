@@ -36,4 +36,20 @@ function inserirProduto(
     } catch (Exception $erro) {
         die("Erro ao inserir produto: ".$erro->getMessage());
     }
+};
+
+//listarUmProduto: usada pela página produtos/atualizar.php
+
+function listarUmProduto(PDO $conexao, int $idProduto):array {
+    $sql = "SELECT * FROM produtos WHERE id = :id";
+
+    try{
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(":id", $idProduto, PDO::PARAM_INT);
+        $consulta->execute();
+        return $consulta->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $erro) {
+        die("Erro ao carregar fabricante: ".$erro->getMessage());
+    }
 }
+

@@ -19,7 +19,6 @@ if(isset($_POST['atualizar'])){
 }
 ?>
  
- 
 <!DOCTYPE html>
 <html lang="pt-br">
  
@@ -36,7 +35,6 @@ if(isset($_POST['atualizar'])){
         <hr>
  
         <form action="" method="post" class="w-25">
-            <!-- Campo oculto (hidden): o formulário/servirdor "sabe" do valor, mas mão mostra para o usuário -->
              <input type="hidden" name="id" value="<?=$fabricante['id']?>">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
