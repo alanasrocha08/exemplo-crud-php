@@ -1,10 +1,10 @@
 <?php
 require_once "../src/funcoes-produtos.php";
 
-/*Obtendo valor do parâmetro via URL */
-$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+require_once "../src/funcoes-fabricantes.php";
+$listaDeFabricantes = listarFabricantes($conexao);
 
-/*Chamando a função para carregar os dados de um produto */
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $produto = listarUmProduto($conexao, $id);
 ?>
 <!DOCTYPE html>
@@ -23,30 +23,50 @@ $produto = listarUmProduto($conexao, $id);
         <hr>
 
         <form action="" method="post" class="w-50">
+        <input type="hidden" name="id" value="<?=$produto['id']?>">
             <div class="mb-3">
                 <label class="form-label" for="nome">Nome:</label>
-                <input class="form-control" type="text" name="nome" id="nome" value="<?=$produto['nome']?>">
+                <input value="<?= $produto['nome'] ?>"
+                    class="form-control" type="text" name="nome" id="nome" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="preco">Preço:</label>
-                <input class="form-control" type="number" min="10" max="10000" step="0.01" name="preco" id="preco"  value="<?=$produto['preco']?>"required>
+                <input value="<?= $produto['preco'] ?>"
+                    class="form-control" type="number" min="10" max="10000" step="0.01" name="preco" id="preco" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="quantidade">Quantidade:</label>
-                <input class="form-control" type="number" min="1" max="100" name="quantidade" id="quantidade"  value="<?=$produto['quantidade']?>"required>
+                <input value="<?= $produto['quantidade'] ?>"
+                    class="form-control" type="number" min="1" max="100" name="quantidade" id="quantidade" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="fabricante">Fabricante:</label>
                 <select class="form-select" name="fabricante" id="fabricante" required>
-                    <option ></option>
-                    <option value="">Fabricante 1...</option>
-                    <option value="">Fabricante 2...</option>
-                    <option value="">Fabricante 3...</option>
+                    <option value=""></option>
+
+
+            <!-- Algoritmo para seleção do fabricante do produto
+            que será editado 
+            
+            Se a FK da tabela produtos for igual a PK da tabela fabricantes,
+            ou seja, se o id do fabricante do produto for igual ao id
+            do fabricante, então coloque o atributo "selected" no <option>
+            correspondente.
+            -->
+                    <?php foreach ($listaDeFabricantes as $fabricante): ?>
+                        <option
+        <?php if($produto['fabricante_id'] === $fabricante['id']) echo " selected " ?>
+                        value="<?= $fabricante['id'] ?>">
+                            <?= $fabricante['nome'] ?>
+                        </option>
+                    <?php endforeach; ?>
+
                 </select>
+
             </div>
             <div class="mb-3">
                 <label class="form-label" for="descricao">Descrição:</label> <br>
-                <textarea class="form-control" name="descricao" id="descricao"  cols="30" rows="3"><?=$produto['descricao']?></textarea>
+                <textarea class="form-control" name="descricao" id="descricao" cols="30" rows="3"><?= $produto['descricao'] ?></textarea>
             </div>
             <button class="btn btn-warning" type="submit" name="atualizar">Atualizar produto</button>
         </form>
